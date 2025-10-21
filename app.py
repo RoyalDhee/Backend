@@ -14,8 +14,8 @@ data = [{"name": "Sam LArry", "age": 20, "track": "AI Developer"},
 
 class Item(BaseModel):
     name: str = Field(..., example="Perpetual")
-    age: int = Field(example=25)
-    track: str = Field(example="Fullstack Developer")
+    age: int = Field(..., example=25)
+    track: str = Field(..., example="Fullstack Developer")
 
 
 @app.get("/", description="This endpoint just returns a particular message")
@@ -42,14 +42,14 @@ def update_data(id: int, req: Item):
     return {"Message": "Data updated", "Data": data}
 
 
-@app.patch("/edit_data/{id}")
-def edit_data(id: int, req: Item):
-    keys = data[id].keys()
-    values = data[id].values()
-    for key, value in req.dict().items():
-        data[id][key] = value
-    print(data)
-    return {"Message": "Data Edited", "Data": data}
+# @app.patch("/edit_data/{id}")
+# def edit_data(id: int, req: Item):
+#     keys = data[id].keys()
+#     values = data[id].values()
+#     for key, value in req.dict().items():
+#         data[id][key] = value
+#     print(data)
+#     return {"Message": "Data Edited", "Data": data}
 
 
 if __name__ == "__main__":
