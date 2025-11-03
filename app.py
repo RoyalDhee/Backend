@@ -7,6 +7,7 @@ import os
 load_dotenv()
 
 app = FastAPI(title="Simple Fast API", version="1.0.0")
+
 data = [{"name": "Sam LArry", "age": 20, "track": "AI Developer"},
         {"name": "Bahubali", "age": 23, "track": "Backend Developer"},
         {"name": "John Doe", "age": 25, "track": "Frontend Developer"}]
@@ -50,6 +51,11 @@ def update_data(id: int, req: Item):
 #         data[id][key] = value
 #     print(data)
 #     return {"Message": "Data Edited", "Data": data}
+
+@app.patch("/edit_data/{id}")
+def edit_data(id: int, req: dict):
+    data[id].update(req)
+    return {"Message": "Data Edited", "Data": data}
 
 
 if __name__ == "__main__":
